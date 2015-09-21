@@ -1,0 +1,204 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical"
+    tools:context="govjobs.govjob.ui.JobList">
+
+    <include
+        android:id="@+id/appToolbar"
+        layout="@layout/app_toolbar"></include>
+
+    <android.support.v4.widget.DrawerLayout
+        android:id="@+id/drawerLayout"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <LinearLayout
+            android:id="@+id/mainContent"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="vertical"
+                android:weightSum="1" >
+                <!--android:paddingBottom="@dimen/activity_vertical_margin"-->
+                <!--android:paddingLeft="@dimen/activity_horizontal_margin"-->
+                <!--android:paddingRight="@dimen/activity_horizontal_margin"-->
+                <!--android:paddingTop="@dimen/activity_vertical_margin"-->
+
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:weightSum="1">
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="0dp"
+                        android:layout_weight="0.35"
+                        android:background="@android:color/white"
+                        android:orientation="horizontal"
+                        android:weightSum="1">
+
+                        <EditText
+                            android:id="@+id/searchEditText"
+                            android:layout_width="@dimen/width_0_dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="0.9"
+                            android:hint="keyword(s) or job title"
+                            android:textSize="@dimen/search_hint_text_size"
+                            android:imeOptions="actionSearch"
+                            android:singleLine="true"
+                            />
+                        <!--<android:imeOptions="actionSearch"-->
+                        <!--android:imeActionLabel="@string/imeSearch_ActionLabel"-->
+
+                        <ImageView
+                            android:id="@+id/searchImageView"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="0.1"
+
+                            android:onClick="searchJobs"
+                            android:clickable="true"
+                            android:src="@android:drawable/ic_menu_search"
+                            android:focusable="true"
+                            android:focusableInTouchMode="true" />
+
+                    </LinearLayout>
+
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="@dimen/filter_btn_height"
+                        android:layout_gravity="bottom"
+                        android:layout_marginTop="@dimen/filter_btn_margin_top"
+                        android:layout_weight="0.3"
+                        android:gravity="center"
+                        android:orientation="horizontal">
+
+                        <Button
+                            android:id="@+id/filterBtn"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:background="@android:color/white"
+                            android:gravity="center"
+                            android:onClick="showFilterOptions"
+                            android:text="Filter"
+                            android:textColor="@android:color/holo_orange_dark"
+                            android:textSize="14sp"
+                            android:textStyle="bold"
+                            android:typeface="normal">
+
+                        </Button>
+
+                    </LinearLayout>
+                </LinearLayout>
+
+                <Space
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp" />
+
+                <LinearLayout
+                    android:id="@+id/progressLinearLayout"
+                    android:layout_width="match_parent"
+                    android:layout_height="0dp"
+                    android:layout_weight="0.05"
+                    android:gravity="center"
+                    android:orientation="horizontal"
+                    android:visibility="visible">
+
+                    <TextView
+                        android:id="@+id/loadingTxt"
+                        android:layout_width="wrap_content"
+                        android:layout_height="match_parent"
+                        android:gravity="center"
+                        android:text="Loading"
+                        android:textAppearance="?android:attr/textAppearanceMedium"
+                        android:visibility="visible" />
+
+                    <ProgressBar
+                        android:id="@+id/progressBar"
+                        style="?android:attr/progressBarStyleSmall"
+                        android:layout_width="wrap_content"
+                        android:layout_height="match_parent"
+                        android:layout_gravity="center_horizontal"
+                        android:layout_marginLeft="10dp"
+                        android:max="100" />
+
+
+                </LinearLayout>
+
+
+                <TextView
+                    android:id="@+id/numbOfJobTxt"
+                    android:layout_width="match_parent"
+                    android:layout_height="0dp"
+                    android:layout_weight="0.04"
+                    android:textAppearance="?android:attr/textAppearanceSmall" />
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="0dp"
+                    android:layout_gravity="center_horizontal"
+                    android:layout_marginBottom="10dp"
+                    android:layout_weight="0.001"
+                    android:background="#ff591bff"
+                    android:orientation="horizontal"></LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="0dp"
+                    android:layout_weight="1"
+                    android:orientation="vertical"
+                    android:visibility="visible"
+                    android:weightSum="1">
+
+                    <ListView
+                        android:id="@+id/listView"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:layout_alignParentLeft="true"
+                        android:layout_alignParentStart="true"
+                        android:layout_alignParentTop="true"
+                        android:visibility="visible" />
+
+                    <TextView
+                        android:id="@+id/noResultTxt"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center_horizontal"
+                        android:layout_weight="0.48"
+                        android:gravity="left"
+                        android:text="@string/no_search_result"
+                        android:textAppearance="?android:attr/textAppearanceLarge"
+                        android:textSize="18sp"
+                        android:visibility="gone" />
+                </LinearLayout>
+
+            </LinearLayout>
+        </LinearLayout>
+
+
+        <!--put all the width and height dimensions in 'dimen' folder, that will make your app
+        appearance work accross muiltiple device screen-->
+        <fragment
+            android:id="@+id/nav_drawer_frag"
+            android:name="govjobs.govjob.ui.NavDrawerFragment"
+            android:layout_width="@dimen/nav_drawer_width"
+            android:layout_height="match_parent"
+            android:layout_gravity="start"
+            app:layout="@layout/fragment_nav_drawer"
+            tools:layout="@layout/fragment_nav_drawer" />
+
+
+
+
+    </android.support.v4.widget.DrawerLayout>
+</LinearLayout>
